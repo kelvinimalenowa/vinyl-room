@@ -64,7 +64,6 @@
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #9061c4;
 }
 
 .form-group input::placeholder,
@@ -125,7 +124,6 @@
 
 .song-form-aside {
     padding: 45px 35px;
-    border: 1px solid rgba(144, 97, 196, 0.25);
     border-radius: 14px;
     background: linear-gradient(145deg, #1b1626, #101018);
     text-align: center;

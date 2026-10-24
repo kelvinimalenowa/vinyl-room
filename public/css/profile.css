@@ -97,7 +97,6 @@
 
 .collection-card:hover {
     transform: translateY(-4px);
-    border-color: #9061c4;
 }
 
 .collection-art {

@@ -1,11 +1,13 @@
-module.exports = function (app) {
-    const User = require('./models/user')
-    const bcrypt = require('bcrypt')
-    const passport = require('passport')
-    const Song = require('./models/song')
-    const { searchSpotifyTrack } = require('../config/spotify');
+const bcrypt = require('bcrypt')
+const Song = require('./models/song')
+const User = require('./models/user')
+const { searchSpotifyTrack } = require('../config/spotify')
 
-    //homepage
+module.exports = function (app, passport) {
+
+    // normal routes ===============================================================
+
+    // show the home page (will also have our login links)
     app.get('/', async (req, res) => {
         try {
             const songs = await Song.find()
@@ -24,95 +26,7 @@ module.exports = function (app) {
         }
     })
 
-    //display signup page
-    app.get('/signup', (req, res) => {
-        res.render('signup')
-    })
-
-    //create a new user
-    app.post('/signup', async (req, res) => {
-        try {
-            const { username, email, password } = req.body
-
-            if (!username?.trim() || !email?.trim() || !password) {
-                return res.status(400).send('All fields are required.')
-            }
-
-            if (password.length < 8) {
-                return res.status(400).send('Password must be at least 8 characters.')
-            }
-
-            const normalizedEmail = email.trim().toLowerCase()
-            const normalizedUsername = username.trim()
-
-            //check whether the account already exists
-            const existingUser = await User.findOne({
-                $or: [
-                    { email: normalizedEmail },
-                    { username: normalizedUsername }
-                ]
-            })
-
-            if (existingUser) {
-                return res.status(400).send('Email or username already in use.')
-            }
-
-            //hash password before saving
-            const hashedPassword = await bcrypt.hash(password, 12)
-
-            //save user to MongoDB
-            await User.create({
-                username: normalizedUsername,
-                email: normalizedEmail,
-                password: hashedPassword
-            })
-
-            res.redirect('/login')
-
-        } catch (err) {
-            console.error(err)
-
-            if (err.code === 11000) {
-                return res.status(400).send('Email or username already in use.')
-            }
-
-            res.status(500).send('Something went wrong creating your account.')
-        }
-    })
-
-    //display login page
-    app.get('/login', (req, res) => {
-        if (req.isAuthenticated()) {
-            return res.redirect('/profile')
-        }
-
-        res.render('login')
-    })
-
-    //authenticate user
-    app.post('/login', passport.authenticate('local', {
-        successRedirect: '/profile',
-        failureRedirect: '/login'
-    }))
-
-    //log out user
-    app.post('/logout', (req, res, next) => {
-        req.logout(err => {
-            if (err) {
-                return next(err)
-            }
-
-            req.session.destroy(err => {
-                if (err) {
-                    return next(err)
-                }
-
-                res.clearCookie('connect.sid')
-                res.redirect('/')
-            })
-        })
-    })
-
+    // PROFILE SECTION =========================
     //display user profile and their songs
     app.get('/profile', async (req, res) => {
         if (!req.isAuthenticated()) {
@@ -135,15 +49,25 @@ module.exports = function (app) {
         }
     })
 
-    //display Add Song page
-    app.get('/songs/new', (req, res) => {
-        if (!req.isAuthenticated()) {
-            return res.redirect('/login')
-        }
+    // LOGOUT ==============================
+    app.post('/logout', (req, res, next) => {
+        req.logout(err => {
+            if (err) {
+                return next(err)
+            }
 
-        res.render('new-song')
+            req.session.destroy(err => {
+                if (err) {
+                    return next(err)
+                }
+
+                res.clearCookie('connect.sid')
+                res.redirect('/')
+            })
+        })
     })
 
+    // song routes ==============================================================
     //create a new song
     app.post('/songs', async (req, res) => {
         if (!req.isAuthenticated()) {
@@ -179,6 +103,16 @@ module.exports = function (app) {
         }
     });
 
+    //display Add Song page
+    app.get('/songs/new', (req, res) => {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/login')
+        }
+
+        res.render('new-song')
+    })
+
+    //liking a song post
     app.post('/songs/:id/upvote', async (req, res) => {
         if (!req.isAuthenticated()) {
             return res.redirect('/login');
@@ -241,7 +175,7 @@ module.exports = function (app) {
         }
     })
 
-    //display edit song form
+    //show the edit form
     app.get('/songs/:id/edit', async (req, res) => {
         if (!req.isAuthenticated()) {
             return res.redirect('/login')
@@ -331,4 +265,79 @@ module.exports = function (app) {
             res.status(400).send('Unable to delete song.')
         }
     })
-}
+
+    // =============================================================================
+    // AUTHENTICATE (FIRST LOGIN) ==================================================
+    // =============================================================================
+
+    // LOGIN ===============================
+    // show the login form
+    app.get('/login', (req, res) => {
+        if (req.isAuthenticated()) {
+            return res.redirect('/profile')
+        }
+
+        res.render('login')
+    })
+
+    // process the login form
+    app.post('/login', passport.authenticate('local', {
+        successRedirect: '/profile', // redirect to the secure profile section
+        failureRedirect: '/login', // redirect back to the signup page if there is an error
+    }));
+
+    // SIGNUP =================================
+    // show the signup form
+    app.get('/signup', (req, res) => {
+        res.render('signup')
+    })
+
+    // process the signup form
+    //create a new user
+    app.post('/signup', async (req, res) => {
+        try {
+            const { username, email, password } = req.body
+
+            if (!username?.trim() || !email?.trim() || !password) {
+                return res.status(400).send('All fields are required.')
+            }
+
+            const normalizedEmail = email.trim().toLowerCase()
+            const normalizedUsername = username.trim()
+
+            //check whether the account already exists
+            const existingUser = await User.findOne({
+                $or: [
+                    { email: normalizedEmail },
+                    { username: normalizedUsername }
+                ]
+            })
+
+            if (existingUser) {
+                return res.status(400).send('Email or username already in use.')
+            }
+
+            //hash password before saving
+            const hashedPassword = await bcrypt.hash(password, 12)
+
+            //save user to MongoDB
+            await User.create({
+                username: normalizedUsername,
+                email: normalizedEmail,
+                password: hashedPassword
+            })
+
+            res.redirect('/login')
+
+        } catch (err) {
+            console.error(err)
+
+            if (err.code === 11000) {
+                return res.status(400).send('Email or username already in use.')
+            }
+
+            res.status(500).send('Something went wrong creating your account.')
+        }
+    })
+
+};

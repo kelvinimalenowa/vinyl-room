@@ -1,25 +1,32 @@
+// server.js
+
+// set up ======================================================================
+// get all the tools we need
 require('dotenv').config()
-require('./config/database')
 
-const express = require('express')
-const mongoose = require('mongoose')
+const express = require('express');
+const mongoose = require('mongoose');
+const session = require('express-session');
 const methodOverride = require('method-override')
-const session = require('express-session')
-const passport = require('passport')
+const passport = require('passport');
 
-const app = express()
-const PORT = process.env.PORT || 3000
+const app = express(); //calling on express stored in line 7
+const port = process.env.PORT || 3000; //first arg looks for an env (environment) file saved in another foler
 
-//database connection
-require('./config/database')
+// configuration ===============================================================
+require('./config/database')// connect to our database
 
-//middleware
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-app.use(methodOverride('_method'))
+require('./config/passport')(passport); // pass passport for configuration
+
+// set up our express application
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // get information from html forms
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
 
-//configuring session before user authentication session
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+// required for passport
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -30,18 +37,12 @@ app.use(session({
     }
 }))
 
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
-require('./config/passport')(passport)
-
-//view engine
-app.set('view engine', 'ejs')
-
+// launch ======================================================================
 //routes
-require('./app/routes')(app)
+require('./app/routes')(app, passport)
 
-//start server
-app.listen(PORT, () => {
-    console.log(`Vinyl Room running on port ${PORT}`)
-})
+app.listen(port);
+console.log('Port ' + port )+ ' is live.';

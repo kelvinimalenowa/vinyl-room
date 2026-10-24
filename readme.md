@@ -6,7 +6,7 @@ Vinyl Room is a full-stack music discovery and sharing application where users c
 
 Built with Node.js, Express, MongoDB, and EJS, Vinyl Room integrates the Spotify Web API to automatically retrieve album artwork for shared tracks.
 
-### 🔗 Live Application
+## 🔗 Live Application
 
 [Explore Vinyl Room](https://vinyl-room.onrender.com/)
 
@@ -111,7 +111,3 @@ I built Vinyl Room to explore the intersection of music discovery and community-
 The project gave me the opportunity to work with user authentication, RESTful routing, MongoDB data relationships, third-party API integration, and dynamic server-rendered interfaces.
 
 Rather than building a traditional music player, I wanted to create a space centered around sharing music and discovering tracks through other people's recommendations.
-
----
-
-Built with 🎧 and a love for good music.

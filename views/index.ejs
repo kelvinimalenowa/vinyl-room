@@ -39,195 +39,192 @@
 
     <main>
 
-        <section class="hero">
-            <div class="hero-content">
-                <p class="eyebrow">WELCOME TO VINYL ROOM</p>
+        <% if (!currentUser) { %>
+            <section class="hero">
+                <div class="hero-content">
+                    <p class="eyebrow">WELCOME TO VINYL ROOM</p>
 
-                <h1>Good music deserves to be shared.</h1>
+                    <h1>Good music deserves to be shared.</h1>
 
-                <p class="hero-description">
-                    Discover new sounds, share your favorite tracks,
-                    and connect with people who love music as much
-                    as you do.
-                </p>
+                    <p class="hero-description">
+                        Discover new sounds, share your favorite tracks,
+                        and connect with people who love music as much
+                        as you do.
+                    </p>
 
-                <% if (currentUser) { %>
-                    <a href="/songs/new" class="cta-button">
-                        Share a Song →
+                    <a href="/signup" class="cta-button">
+                        Join the Room →
                     </a>
-                    <% } else { %>
-                        <a href="/signup" class="cta-button">
-                            Join the Room →
-                        </a>
-                        <% } %>
-            </div>
-
-            <div class="hero-art" aria-hidden="true">
-                <div class="vinyl-record">
-                    <div class="record-label"></div>
                 </div>
-            </div>
-        </section>
 
-        <section class="discover">
+                <div class="hero-art" aria-hidden="true">
+                    <div class="vinyl-record">
+                        <div class="record-label"></div>
+                    </div>
+                </div>
+            </section>
+            <% } %>
 
-            <div class="discover-heading">
-                <p class="eyebrow">THE COMMUNITY'S PICKS</p>
-                <h2>Recently Shared.</h2>
+                <section class="discover">
 
-                <p class="section-description">
-                    See what everyone's been listening to.
-                </p>
-            </div>
+                    <div class="discover-heading">
+                        <p class="eyebrow">THE COMMUNITY'S PICKS</p>
+                        <h2>Recently Shared.</h2>
 
-            <% if (songs.length===0) { %>
+                        <p class="section-description">
+                            See what everyone's been listening to.
+                        </p>
+                    </div>
 
-                <p class="empty-state">
-                    No songs have been shared yet. Be the first!
-                </p>
+                    <% if (songs.length===0) { %>
 
-                <% } else { %>
+                        <p class="empty-state">
+                            No songs have been shared yet. Be the first!
+                        </p>
 
-                    <div class="songs-grid">
+                        <% } else { %>
 
-                        <% songs.forEach(song=> { %>
+                            <div class="songs-grid">
 
-                            <article class="song-card">
+                                <% songs.forEach(song=> { %>
 
-                                <div class="song-art">
-                                    <% if (song.albumArt) { %>
-                                        <img src="<%= song.albumArt %>" alt="Album artwork for <%= song.title %>"
-                                            loading="lazy">
-                                        <% } else { %>
-                                            <span aria-hidden="true">♫</span>
-                                            <% } %>
-                                </div>
+                                    <article class="song-card">
 
-                                <div class="song-info">
+                                        <div class="song-art">
+                                            <% if (song.albumArt) { %>
+                                                <img src="<%= song.albumArt %>"
+                                                    alt="Album artwork for <%= song.title %>" loading="lazy">
+                                                <% } else { %>
+                                                    <span aria-hidden="true">♫</span>
+                                                    <% } %>
+                                        </div>
 
-                                    <span class="song-genre">
-                                        <%= song.genre %>
-                                    </span>
+                                        <div class="song-info">
 
-                                    <h3>
-                                        <a href="/songs/<%= song._id %>">
-                                            <%= song.title %>
-                                        </a>
-                                    </h3>
+                                            <span class="song-genre">
+                                                <%= song.genre %>
+                                            </span>
 
-                                    <p class="song-artist">
-                                        <%= song.artist %>
-                                    </p>
+                                            <h3>
+                                                <a href="/songs/<%= song._id %>">
+                                                    <%= song.title %>
+                                                </a>
+                                            </h3>
 
-                                    <% if (song.album) { %>
-                                        <p class="song-album">
-                                            <%= song.album %>
-                                        </p>
-                                        <% } %>
+                                            <p class="song-artist">
+                                                <%= song.artist %>
+                                            </p>
 
-                                            <% if (song.description) { %>
-                                                <p class="song-description">
-                                                    <%= song.description %>
+                                            <% if (song.album) { %>
+                                                <p class="song-album">
+                                                    <%= song.album %>
                                                 </p>
                                                 <% } %>
 
-                                                    <div class="song-card-footer">
-                                                        <span>
-                                                            Shared by
-                                                            <strong>
-                                                                <%= song.user?.username || 'Unknown user' %>
-                                                            </strong>
-                                                        </span>
+                                                    <% if (song.description) { %>
+                                                        <p class="song-description">
+                                                            <%= song.description %>
+                                                        </p>
+                                                        <% } %>
 
-                                                        <a href="/songs/<%= song._id %>">
-                                                            View →
-                                                        </a>
-
-                                                        <form action="/songs/<%= song._id %>/upvote" method="POST">
-                                                            <button type="submit"
-                                                                class="card-upvote-btn <%= currentUser && song.upvotes?.some(id => String(id) === String(currentUser._id)) ? 'upvoted' : '' %>"
-                                                                aria-label="Upvote <%= song.title %>"
-                                                                aria-pressed="<%= currentUser ? song.upvotes?.some(id => String(id) === String(currentUser._id)) : false %>">
-                                                                <span aria-hidden="true">▲</span>
-                                                                <span class="upvote-count">
-                                                                    <%= song.upvotes?.length || 0 %>
+                                                            <div class="song-card-footer">
+                                                                <span>
+                                                                    Shared by
+                                                                    <strong>
+                                                                        <%= song.user?.username || 'Unknown user' %>
+                                                                    </strong>
                                                                 </span>
-                                                            </button>
-                                                        </form>
 
-                                                    </div>
+                                                                <a href="/songs/<%= song._id %>">
+                                                                    View →
+                                                                </a>
 
-                                </div>
-                            </article>
+                                                                <form action="/songs/<%= song._id %>/upvote"
+                                                                    method="POST">
+                                                                    <button type="submit"
+                                                                        class="card-upvote-btn <%= currentUser && song.upvotes?.some(id => String(id) === String(currentUser._id)) ? 'upvoted' : '' %>"
+                                                                        aria-label="Upvote <%= song.title %>"
+                                                                        aria-pressed="<%= currentUser ? song.upvotes?.some(id => String(id) === String(currentUser._id)) : false %>">
+                                                                        <span aria-hidden="true">▲</span>
+                                                                        <span class="upvote-count">
+                                                                            <%= song.upvotes?.length || 0 %>
+                                                                        </span>
+                                                                    </button>
+                                                                </form>
 
-                            <% }) %>
+                                                            </div>
+
+                                        </div>
+                                    </article>
+
+                                    <% }) %>
+
+                            </div>
+
+                            <% } %>
+
+                </section>
+
+                <section class="features">
+
+                    <h2>Find Your Frequency.</h2>
+
+                    <p class="section-description">
+                        A space for discovering, sharing, and celebrating music.
+                    </p>
+
+                    <div class="feature-container">
+
+                        <article class="feature-card">
+                            <span class="feature-icon">♫</span>
+                            <h3>Discover</h3>
+                            <p>
+                                Find your next favorite song through
+                                recommendations from real music fans.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <span class="feature-icon">◎</span>
+                            <h3>Share</h3>
+                            <p>
+                                Put people onto the tracks, albums,
+                                and artists you can't stop listening to.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <span class="feature-icon">✦</span>
+                            <h3>Connect</h3>
+                            <p>
+                                Exchange opinions and discover people
+                                who share your taste in music.
+                            </p>
+                        </article>
 
                     </div>
+                </section>
 
-                    <% } %>
+                <section class="join">
 
-        </section>
+                    <h2>Your next favorite track is one conversation away.</h2>
 
-        <section class="features">
-
-            <h2>Find Your Frequency.</h2>
-
-            <p class="section-description">
-                A space for discovering, sharing, and celebrating music.
-            </p>
-
-            <div class="feature-container">
-
-                <article class="feature-card">
-                    <span class="feature-icon">♫</span>
-                    <h3>Discover</h3>
                     <p>
-                        Find your next favorite song through
-                        recommendations from real music fans.
+                        Join a community built around discovering,
+                        sharing, and appreciating good music.
                     </p>
-                </article>
 
-                <article class="feature-card">
-                    <span class="feature-icon">◎</span>
-                    <h3>Share</h3>
-                    <p>
-                        Put people onto the tracks, albums,
-                        and artists you can't stop listening to.
-                    </p>
-                </article>
+                    <% if (currentUser) { %>
+                        <a href="/songs/new" class="cta-button">
+                            Share Your Music →
+                        </a>
+                        <% } else { %>
+                            <a href="/signup" class="cta-button">
+                                Get Started →
+                            </a>
+                            <% } %>
 
-                <article class="feature-card">
-                    <span class="feature-icon">✦</span>
-                    <h3>Connect</h3>
-                    <p>
-                        Exchange opinions and discover people
-                        who share your taste in music.
-                    </p>
-                </article>
-
-            </div>
-        </section>
-
-        <section class="join">
-
-            <h2>Your next favorite track is one conversation away.</h2>
-
-            <p>
-                Join a community built around discovering,
-                sharing, and appreciating good music.
-            </p>
-
-            <% if (currentUser) { %>
-                <a href="/songs/new" class="cta-button">
-                    Share Your Music →
-                </a>
-                <% } else { %>
-                    <a href="/signup" class="cta-button">
-                        Get Started →
-                    </a>
-                    <% } %>
-
-        </section>
+                </section>
 
     </main>
 

@@ -46,9 +46,10 @@
     background: #d48b40;
     color: #080710;
     padding: 10px 20px;
-    border-radius: 6px;
+    border-radius: 999px;
     font-weight: 600;
 }
+
 
 .hero {
     max-width: 1200px;
@@ -90,7 +91,7 @@
     background: #d48b40;
     color: #080710;
     padding: 15px 28px;
-    border-radius: 6px;
+    border-radius: 999px;
     font-weight: 600;
 }
 

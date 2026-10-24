@@ -241,7 +241,6 @@ module.exports = function (app) {
         }
     })
 
-
     //display edit song form
     app.get('/songs/:id/edit', async (req, res) => {
         if (!req.isAuthenticated()) {

@@ -1,0 +1,270 @@
+.profile-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 30px 100px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 45px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+}
+
+.profile-avatar {
+    width: 130px;
+    height: 130px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #9061c4, #d48b40);
+    color: #ffffff;
+    font-size: 52px;
+    font-weight: 700;
+}
+
+.profile-details h1 {
+    font-size: 38px;
+    margin: 12px 0 5px;
+}
+
+.profile-email {
+    color: #a7a3b0;
+    font-size: 14px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.profile-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profile-stat strong {
+    font-size: 26px;
+    color: #d48b40;
+}
+
+.profile-stat span {
+    font-size: 13px;
+    color: #c5c1cb;
+}
+
+.collection-section {
+    margin-top: 85px;
+}
+
+.collection-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.collection-heading h2 {
+    font-size: 36px;
+    margin: 12px 0;
+}
+
+.collection-heading p:not(.eyebrow) {
+    color: #c5c1cb;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.collection-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.collection-card:hover {
+    transform: translateY(-4px);
+    border-color: #9061c4;
+}
+
+.collection-art {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #342344, #16131e);
+}
+
+.mini-record {
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-radial-gradient(circle,
+            #16151b 0px,
+            #29272f 3px,
+            #111016 5px,
+            #18171d 7px);
+    border: 4px solid #111016;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.35);
+}
+
+.mini-record-label {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #d48b40;
+    border: 3px solid #252128;
+}
+
+.collection-info {
+    padding: 24px;
+}
+
+.collection-genre {
+    color: #d48b40;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.collection-info h3 {
+    font-size: 21px;
+    margin: 12px 0 5px;
+}
+
+.collection-info h3 a {
+    color: #ffffff;
+}
+
+.collection-artist {
+    color: #c5c1cb;
+}
+
+.collection-album {
+    color: #a7a3b0;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.collection-view {
+    display: inline-block;
+    color: #d48b40;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 25px;
+}
+
+.collection-empty {
+    text-align: center;
+    padding: 80px 25px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+}
+
+.empty-record {
+    font-size: 50px;
+    color: #9061c4;
+    margin-bottom: 20px;
+}
+
+.collection-empty h3 {
+    font-size: 24px;
+}
+
+.collection-empty p {
+    color: #c5c1cb;
+    max-width: 400px;
+    margin: 15px auto 25px;
+    line-height: 1.7;
+}
+
+.profile-song-art {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle, #342344, #16131e);
+}
+
+.profile-song-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-song-art .profile-record {
+    width: 65%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: repeating-radial-gradient(circle,
+            #16151b 0px,
+            #29272f 3px,
+            #111016 5px,
+            #18171d 7px);
+    border: 5px solid #111016;
+}
+
+.profile-song-art .profile-record-label {
+    width: 35%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #9061c4;
+}
+
+@media (max-width: 900px) {
+    .collection-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-page {
+        padding: 35px 20px 70px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 35px 20px;
+    }
+
+    .profile-stats {
+        justify-content: center;
+    }
+
+    .collection-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .collection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-details h1 {
+        font-size: 30px;
+    }
+}

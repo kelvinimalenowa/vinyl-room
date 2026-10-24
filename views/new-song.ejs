@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Share a Song | Vinyl Room</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/songs.css">
+</head>
+
+<body class="home-page">
+
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="/" class="logo">VINYL ROOM.</a>
+
+            <div class="nav-links">
+                <a href="/">Discover</a>
+                <a href="/profile">My Profile</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="song-form-page">
+
+        <div class="song-form-heading">
+            <p class="eyebrow">ADD TO THE COLLECTION</p>
+            <h1>Put us on.</h1>
+            <p>
+                Been listening to something good lately?
+                Share it with the room.
+            </p>
+        </div>
+
+        <div class="song-form-layout">
+
+            <section class="song-form-card">
+                <form action="/songs" method="POST">
+
+                    <div class="form-group">
+                        <label for="title">Song Title <span>*</span></label>
+                        <input type="text" id="title" name="title" placeholder="What's the track called?"
+                            maxlength="150" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="artist">Artist <span>*</span></label>
+                        <input type="text" id="artist" name="artist" placeholder="Who's behind the music?"
+                            maxlength="150" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="album">Album</label>
+                            <input type="text" id="album" name="album" placeholder="Album or project name"
+                                maxlength="150">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="genre">Genre <span>*</span></label>
+                            <input type="text" id="genre" name="genre" placeholder="R&B, Hip-Hop, House..."
+                                maxlength="100" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Why this song?</label>
+                        <textarea id="description" name="description" rows="5"
+                            placeholder="Tell us what makes this track worth sharing..." maxlength="2000"></textarea>
+                        <p class="field-hint">
+                            A favorite lyric, a memory, or just a really good beat.
+                        </p>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/profile" class="cancel-link">Cancel</a>
+                        <button type="submit" class="submit-song">
+                            Share This Song →
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+
+            <aside class="song-form-aside">
+                <div class="preview-record" aria-hidden="true">
+                    <div class="preview-record-label"></div>
+                </div>
+
+                <h2>Every track has a story.</h2>
+                <p>
+                    Whether it's an old favorite or something you
+                    just discovered, good music is better when shared.
+                </p>
+
+                <div class="aside-divider"></div>
+
+                <p class="aside-note">
+                    <span>✦</span>
+                    Your song will appear in the community discovery feed
+                    and on your personal profile.
+                </p>
+            </aside>
+
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Vinyl Room. Made for music lovers.</p>
+    </footer>
+
+</body>
+
+</html>

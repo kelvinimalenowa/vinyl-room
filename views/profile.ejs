@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Vinyl Room</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+
+<body class="home-page">
+
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="/" class="logo">VINYL ROOM.</a>
+
+            <div class="nav-links">
+                <a href="/">Discover</a>
+                <a href="/songs/new" class="nav-signup">Share a Song</a>
+
+                <form action="/logout" method="POST">
+                    <button type="submit" class="nav-logout">Log Out</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main class="profile-page">
+
+        <section class="profile-header">
+            <div class="profile-avatar" aria-hidden="true">
+                <span>
+                    <%= user.username.charAt(0).toUpperCase() %>
+                </span>
+            </div>
+
+            <div class="profile-details">
+                <p class="eyebrow">YOUR LISTENING SPACE</p>
+                <h1>
+                    <%= user.username %>
+                </h1>
+                <p class="profile-email">
+                    <%= user.email %>
+                </p>
+
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <strong>
+                            <%= songs.length %>
+                        </strong>
+                        <span>Songs Shared</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="collection-section">
+            <div class="collection-heading">
+                <div>
+                    <p class="eyebrow">CURATED BY YOU</p>
+                    <h2>My Collection.</h2>
+                    <p>Your contributions to the Vinyl Room community.</p>
+                </div>
+
+                <a href="/songs/new" class="cta-button">
+                    + Share a Song
+                </a>
+            </div>
+
+            <% if (songs.length===0) { %>
+                <div class="collection-empty">
+                    <div class="empty-record" aria-hidden="true">♫</div>
+                    <h3>Your collection is waiting.</h3>
+                    <p>
+                        Share a song you've been listening to
+                        and start building your collection.
+                    </p>
+                    <a href="/songs/new" class="cta-button">
+                        Share Your First Song →
+                    </a>
+                </div>
+                <% } else { %>
+                    <div class="collection-grid">
+                        <% songs.forEach(song=> { %>
+                            <article class="collection-card">
+
+                                <div class="profile-song-art">
+                                    <% if (song.albumArt) { %>
+                                        <img src="<%= song.albumArt %>" alt="Album artwork for <%= song.title %>"
+                                            loading="lazy">
+                                        <% } else { %>
+                                            <div class="profile-record" aria-hidden="true">
+                                                <div class="profile-record-label"></div>
+                                            </div>
+                                            <% } %>
+                                </div>
+
+                                <div class="collection-info">
+                                    <span class="collection-genre">
+                                        <%= song.genre %>
+                                    </span>
+
+                                    <h3>
+                                        <a href="/songs/<%= song._id %>">
+                                            <%= song.title %>
+                                        </a>
+                                    </h3>
+
+                                    <p class="collection-artist">
+                                        <%= song.artist %>
+                                    </p>
+
+                                    <% if (song.album) { %>
+                                        <p class="collection-album">
+                                            <%= song.album %>
+                                        </p>
+                                        <% } %>
+
+                                            <a href="/songs/<%= song._id %>" class="collection-view">
+                                                View Song →
+                                            </a>
+                                </div>
+                            </article>
+                            <% }) %>
+                    </div>
+                    <% } %>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Vinyl Room. Made for music lovers.</p>
+    </footer>
+
+</body>
+
+</html>

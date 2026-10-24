@@ -1,0 +1,465 @@
+.song-form-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 65px 30px 110px;
+}
+
+.song-form-heading {
+    margin-bottom: 45px;
+}
+
+.song-form-heading h1 {
+    font-size: clamp(38px, 5vw, 56px);
+    margin: 12px 0;
+}
+
+.song-form-heading>p:last-child {
+    color: #c5c1cb;
+    line-height: 1.8;
+}
+
+.song-form-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+    gap: 35px;
+    align-items: start;
+}
+
+.song-form-card {
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-group label span {
+    color: #d48b40;
+}
+
+.form-group input,
+.form-group textarea {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #16151e;
+    color: #ffffff;
+    font: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #9061c4;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #8e8998;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.field-hint {
+    color: #a7a3b0;
+    font-size: 12px;
+    margin-top: 9px;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.cancel-link {
+    color: #c5c1cb;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.cancel-link:hover {
+    color: #ffffff;
+}
+
+.submit-song {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 6px;
+    background: #d48b40;
+    color: #080710;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.submit-song:hover {
+    background: #efaa61;
+}
+
+.song-form-aside {
+    padding: 45px 35px;
+    border: 1px solid rgba(144, 97, 196, 0.25);
+    border-radius: 14px;
+    background: linear-gradient(145deg, #1b1626, #101018);
+    text-align: center;
+}
+
+.preview-record {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid #111016;
+    background: repeating-radial-gradient(circle,
+            #16151b 0px,
+            #29272f 3px,
+            #111016 5px,
+            #18171d 7px);
+    box-shadow: 0 0 55px rgba(144, 97, 196, 0.18);
+}
+
+.preview-record-label {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #9061c4;
+    border: 4px solid #252128;
+}
+
+.song-form-aside h2 {
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.song-form-aside>p {
+    color: #c5c1cb;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.aside-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 30px 0;
+}
+
+.aside-note {
+    font-size: 13px !important;
+}
+
+.aside-note span {
+    color: #d48b40;
+    margin-right: 6px;
+}
+
+.song-detail-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 55px 30px 110px;
+    min-height: 75vh;
+}
+
+.song-back-link {
+    display: inline-block;
+    color: #c5c1cb;
+    text-decoration: none;
+    margin-bottom: 35px;
+    font-size: 14px;
+}
+
+.song-back-link:hover {
+    color: #d48b40;
+}
+
+.song-detail-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.song-detail-art {
+    background: radial-gradient(circle, #342344, #16131e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 30px;
+}
+
+.detail-record {
+    width: min(100%, 300px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 7px solid #111016;
+    background: repeating-radial-gradient(circle,
+            #16151b 0px,
+            #29272f 3px,
+            #111016 5px,
+            #18171d 7px);
+    box-shadow: 0 0 70px rgba(144, 97, 196, 0.2);
+}
+
+.detail-record-label {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #9061c4;
+    border: 5px solid #252128;
+}
+
+.song-detail-content {
+    padding: 55px 45px;
+}
+
+.detail-genre {
+    display: inline-block;
+    margin-top: 22px;
+    color: #d48b40;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.song-detail-content h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.2;
+    margin: 12px 0;
+    overflow-wrap: anywhere;
+}
+
+.song-detail-content h2 {
+    font-size: 23px;
+    color: #c5c1cb;
+    font-weight: 400;
+}
+
+.detail-album {
+    color: #a7a3b0;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.detail-album strong {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.detail-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 35px 0;
+}
+
+.detail-description h3 {
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.detail-description p {
+    color: #c5c1cb;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.detail-shared-by {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 35px;
+}
+
+.detail-shared-by span {
+    color: #a7a3b0;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.detail-shared-by strong {
+    color: #d48b40;
+    font-size: 15px;
+}
+
+.detail-album-art {
+    width: min(100%, 350px);
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+}
+
+.song-owner-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 35px;
+}
+
+.song-voting {
+    margin-top: 30px;
+}
+
+.upvote-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #c5c1cb;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upvote-btn:hover {
+    border-color: #d48b40;
+    color: #d48b40;
+}
+
+.upvote-btn.upvoted {
+    background: rgba(212, 139, 64, 0.12);
+    border-color: #d48b40;
+    color: #d48b40;
+}
+
+.upvote-btn span:first-child {
+    font-size: 16px;
+}
+
+.edit-song-btn,
+.delete-song-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-song-btn {
+    background: #d48b40;
+    color: #080710;
+    text-decoration: none;
+}
+
+.edit-song-btn:hover {
+    background: #efaa61;
+}
+
+.delete-song-btn {
+    background: transparent;
+    color: #ef9292;
+    border: 1px solid rgba(239, 146, 146, 0.4);
+}
+
+.delete-song-btn:hover {
+    background: rgba(239, 146, 146, 0.1);
+}
+
+@media (max-width: 800px) {
+    .song-detail-card {
+        grid-template-columns: 1fr;
+    }
+
+    .song-detail-art {
+        padding: 45px 25px;
+    }
+
+    .detail-record {
+        max-width: 230px;
+    }
+}
+
+@media (max-width: 600px) {
+    .song-detail-page {
+        padding: 35px 20px 70px;
+    }
+
+    .song-detail-content {
+        padding: 35px 25px;
+    }
+
+    .song-detail-content h1 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 900px) {
+    .song-form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .song-form-aside {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .song-form-page {
+        padding: 40px 20px 70px;
+    }
+
+    .song-form-card {
+        padding: 25px 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    .submit-song {
+        width: 100%;
+    }
+
+    .cancel-link {
+        text-align: center;
+    }
+}

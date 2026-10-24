@@ -1,0 +1,27 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+.nav-logout {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.nav-logout:hover {
+    color: #d48b40;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= song.title %> | Vinyl Room
+    </title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/songs.css">
+</head>
+
+<body class="home-page">
+
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="/" class="logo">VINYL ROOM.</a>
+
+            <div class="nav-links">
+                <a href="/">Discover</a>
+
+                <% if (currentUser) { %>
+                    <a href="/profile">My Profile</a>
+                    <a href="/songs/new" class="nav-signup">Share a Song</a>
+                    <% } else { %>
+                        <a href="/login">Log In</a>
+                        <a href="/signup" class="nav-signup">Sign Up</a>
+                        <% } %>
+            </div>
+        </nav>
+    </header>
+
+    <main class="song-detail-page">
+
+        <a href="/" class="song-back-link">← Back to Discovery</a>
+
+        <section class="song-detail-card">
+
+            <div class="song-detail-art">
+                <% if (song.albumArt) { %>
+                    <img src="<%= song.albumArt %>" alt="Album artwork for <%= song.title %>" class="detail-album-art">
+                    <% } else { %>
+                        <div class="detail-record" aria-hidden="true">
+                            <div class="detail-record-label"></div>
+                        </div>
+                        <% } %>
+            </div>
+
+            <div class="song-detail-content">
+
+                <p class="eyebrow">NOW IN THE ROOM</p>
+
+                <span class="detail-genre">
+                    <%= song.genre %>
+                </span>
+
+                <h1>
+                    <%= song.title %>
+                </h1>
+                <h2>
+                    <%= song.artist %>
+                </h2>
+
+                <% if (song.album) { %>
+                    <p class="detail-album">
+                        From the album <strong>
+                            <%= song.album %>
+                        </strong>
+                    </p>
+                    <% } %>
+
+                        <div class="detail-divider"></div>
+
+                        <div class="detail-description">
+                            <h3>Why this track?</h3>
+
+                            <% if (song.description) { %>
+                                <p>
+                                    <%= song.description %>
+                                </p>
+                                <% } else { %>
+                                    <p>No description added yet.</p>
+                                    <% } %>
+                        </div>
+
+                        <div class="detail-shared-by">
+                            <span>SHARED BY</span>
+                            <strong>
+                                <%= song.user?.username || 'Unknown user' %>
+                            </strong>
+                        </div>
+
+                        <div class="song-voting">
+                            <form action="/songs/<%= song._id %>/upvote" method="POST">
+                                <button type="submit"
+                                    class="upvote-btn <%= currentUser && song.upvotes?.some(id => String(id) === String(currentUser._id)) ? 'upvoted' : '' %>">
+                                    <span aria-hidden="true">▲</span>
+                                    <span>
+                                        <%= song.upvotes?.length || 0 %>
+                                            <%= song.upvotes?.length===1 ? 'Upvote' : 'Upvotes' %>
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <% if ( currentUser && song.user && String(song.user._id)===String(currentUser._id) ) { %>
+
+                            <div class="song-owner-actions">
+                                <form action="/songs/<%= song._id %>?_method=DELETE" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this song?')">
+                                    <button type="submit" class="delete-song-btn">
+                                        Delete Song
+                                    </button>
+                                </form>
+                            </div>
+
+                            <% } %>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Vinyl Room. Made for music lovers.</p>
+    </footer>
+
+</body>
+
+</html>

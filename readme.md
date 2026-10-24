@@ -46,6 +46,13 @@ Built with Node.js, Express, MongoDB, and EJS, Vinyl Room integrates the Spotify
 - Render
 - Git & GitHub
 
+## Credits & Acknowledgments
+
+- **[Glassmorphism Login Form – FreeFrontend](https://freefrontend.com/css-login-forms/#2021-glassmorphism-login-form-tutorial-in-html-css-l)** — The login and signup pages were adapted from this design, with customized styling to fit Vinyl Room's visual identity.
+- **[Spotify Web API](https://developer.spotify.com/documentation/web-api)** — Used to retrieve album artwork and track metadata for shared songs.
+
+Vinyl Room's application logic, authentication integration, database functionality, music-sharing features, and upvoting system were developed independently.
+
 ## How It Works
 
 1. **Create an account** to start sharing music.

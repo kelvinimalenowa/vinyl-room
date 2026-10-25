@@ -293,7 +293,6 @@ module.exports = function (app, passport) {
     })
 
     // process the signup form
-    //create a new user
     app.post('/signup', async (req, res) => {
         try {
             const { username, email, password } = req.body
